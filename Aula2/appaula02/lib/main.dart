@@ -41,14 +41,17 @@ class ResponsiveHome extends StatelessWidget {
         backgroundColor: Colors.red,
       ),
       drawer: isMobile ?Drawer(
+        backgroundColor: Colors.red,
         child: ListView(
           children: [
             DrawerHeader(
+              
               child: Text('Menu'),
               ),
               ListTile(
                 title: Text('Item 1'),
-                onTap: () {
+                
+                onLongPress: () {
                   Navigator.push(context, MaterialPageRoute(
                     builder:(context)=>TelaCalculadora()));
                 },
