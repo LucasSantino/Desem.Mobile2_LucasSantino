@@ -1,3 +1,4 @@
+import 'package:appaula02/screen/telacalc.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -10,6 +11,8 @@ class TelaHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      // retira a faixa debug do app
+      debugShowCheckedModeBanner: false,
       title: "App Aula 02 - Responsivo",
       home: ResponsiveHome(),
     );
@@ -44,6 +47,10 @@ class ResponsiveHome extends StatelessWidget {
               ),
               ListTile(
                 title: Text('Item 1'),
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(
+                    builder:(context)=>TelaCalculadora()));
+                },
               ),
               ListTile(
                 title: Text('Item 2'),
@@ -78,9 +85,9 @@ class ResponsiveHome extends StatelessWidget {
               children: [
                 Text('Screen width: ${screenWidth}',style: TextStyle(fontSize: screenWidth/10),),
                 Text('Screen height: ${screenWidth}',style: TextStyle(fontSize: screenWidth/10)),
-                if(isMobile) Text('This a mobile view'),
-                if(isTablet) Text('This is a tablet view'),
-                if(isDesktop) Text('This a desktop view')
+                if(isMobile) Text('This a mobile view',style: TextStyle(fontSize: screenWidth/10),),
+                if(isTablet) Text('This is a tablet view',style: TextStyle(fontSize: screenWidth/10)),
+                if(isDesktop) Text('This a desktop view',style: TextStyle(fontSize: screenWidth/10))
               ],
             ),
           ))
