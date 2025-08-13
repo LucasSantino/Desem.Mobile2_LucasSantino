@@ -1,6 +1,7 @@
 import 'package:appaula02/screen/telacalc.dart';
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart' ; // biblioteca que permite importar o gerenciador
+// de estados Getx
 void main() {
   runApp(TelaHome());
 }
@@ -10,7 +11,7 @@ class TelaHome extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       // retira a faixa debug do app
       debugShowCheckedModeBanner: false,
       title: "App Aula 02 - Responsivo",
@@ -54,6 +55,12 @@ class ResponsiveHome extends StatelessWidget {
               ),
               ListTile(
                 title: Text('Item 2'),
+                
+                   onTap: () {
+                  Navigator.push(context, MaterialPageRoute(
+                    builder:(context)=>SumApp()));
+                   }
+                
               ),
 
           ],
