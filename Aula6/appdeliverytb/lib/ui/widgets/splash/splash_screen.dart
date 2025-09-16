@@ -1,6 +1,7 @@
 
 
 import 'package:appdeliverytb/ui/_core/app_colors.dart';
+import 'package:appdeliverytb/ui/widgets/home/home_Screen.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -37,9 +38,9 @@ class SplashScreen extends StatelessWidget {
                         child: ElevatedButton(
                           
                           onPressed: (){
-                           /* Navigator.pushReplacement(context,
-                            MaterialPageRoute(builder: (context)=>));
-                            */
+                            Navigator.pushReplacement(context,
+                            MaterialPageRoute(builder: (context)=>HomeScreen()));
+                            
                             }, child: Text('Bora')),
                       )
                     ],
