@@ -24,27 +24,29 @@ class DrinkScreen extends StatelessWidget {
           return Card(
             margin: const EdgeInsets.symmetric(vertical: 8),
             child: ListTile(
-              // Imagem removida para evitar crash
-              // leading: Image.asset('assets/${drink.imagePath}', width: 50, height: 50, fit: BoxFit.cover),
               title: Text(drink.name),
               subtitle: Text(drink.description),
-              trailing: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("R\$${drink.price.toString()}"),
-                  const SizedBox(height: 4),
-                  IconButton(
-                    icon: const Icon(Icons.add),
-                    onPressed: () {
-                      Provider.of<BagProvider>(context, listen: false)
-                          .addDrink(drink);
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                            content: Text("${drink.name} adicionado à sacola")),
-                      );
-                    },
-                  ),
-                ],
+              trailing: FittedBox(
+                fit: BoxFit.scaleDown, // força o ajuste no espaço disponível
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text("R\$${drink.price.toString()}"),
+                    IconButton(
+                      padding: EdgeInsets.zero,
+                      constraints: const BoxConstraints(),
+                      icon: const Icon(Icons.add),
+                      onPressed: () {
+                        Provider.of<BagProvider>(context, listen: false)
+                            .addDrink(drink);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                              content: Text("${drink.name} adicionado à sacola")),
+                        );
+                      },
+                    ),
+                  ],
+                ),
               ),
             ),
           );
