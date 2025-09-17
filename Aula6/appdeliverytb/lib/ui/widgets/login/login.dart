@@ -13,10 +13,10 @@ class LoginScreen extends StatelessWidget {
       labelText: label,
       prefixIcon: Icon(icon),
       enabledBorder: const UnderlineInputBorder(
-        borderSide: BorderSide(color: Colors.grey), // linha cinza
+        borderSide: BorderSide(color: Colors.grey), 
       ),
       focusedBorder: const UnderlineInputBorder(
-        borderSide: BorderSide(color: Colors.blue), // linha azul ao focar
+        borderSide: BorderSide(color: Colors.blue), 
       ),
     );
   }
@@ -59,9 +59,9 @@ class LoginScreen extends StatelessWidget {
                   String email = emailController.text.trim();
                   String senha = senhaController.text.trim();
 
-                  // Aqui você coloca sua lógica de login
+                 
                   if (email.isNotEmpty && senha.isNotEmpty) {
-                    // Exemplo simples: vai direto para HomeScreen
+                    
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
@@ -82,7 +82,7 @@ class LoginScreen extends StatelessWidget {
 
             const SizedBox(height: 12),
 
-            // Link para cadastro
+           
             TextButton(
               onPressed: () {
                 Navigator.pushNamed(context, "/cadastro");

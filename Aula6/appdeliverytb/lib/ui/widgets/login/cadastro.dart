@@ -8,16 +8,16 @@ class CadastroScreen extends StatelessWidget {
 
   CadastroScreen({super.key});
 
-  // Função para padronizar todos os campos de texto
+
   InputDecoration customInputDecoration(String label, IconData icon) {
     return InputDecoration(
       labelText: label,
       prefixIcon: Icon(icon),
       enabledBorder: const UnderlineInputBorder(
-        borderSide: BorderSide(color: Colors.grey), // linha cinza
+        borderSide: BorderSide(color: Colors.grey), 
       ),
       focusedBorder: const UnderlineInputBorder(
-        borderSide: BorderSide(color: Colors.blue), // linha azul ao focar
+        borderSide: BorderSide(color: Colors.blue), 
       ),
     );
   }
@@ -47,14 +47,14 @@ class CadastroScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
 
-                // ✅ Campo de email (linha igual aos outros)
+                
                 TextField(
                   controller: emailController,
                   decoration: customInputDecoration("E-mail", Icons.email),
                 ),
                 const SizedBox(height: 16),
 
-                // Campo de senha
+                
                 TextField(
                   controller: senhaController,
                   obscureText: true,
@@ -62,7 +62,7 @@ class CadastroScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 16),
 
-                // Campo de confirmar senha
+               
                 TextField(
                   controller: confirmarSenhaController,
                   obscureText: true,
@@ -70,7 +70,7 @@ class CadastroScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 24),
 
-                // Botão de cadastro
+                
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
@@ -89,7 +89,7 @@ class CadastroScreen extends StatelessWidget {
 
                 const SizedBox(height: 12),
 
-                // Link para voltar ao login
+                
                 TextButton(
                   onPressed: () {
                     Navigator.pushReplacementNamed(context, "/login");

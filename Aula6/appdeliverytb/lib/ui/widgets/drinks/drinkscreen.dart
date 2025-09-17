@@ -27,7 +27,7 @@ class DrinkScreen extends StatelessWidget {
               title: Text(drink.name),
               subtitle: Text(drink.description),
               trailing: FittedBox(
-                fit: BoxFit.scaleDown, // força o ajuste no espaço disponível
+                fit: BoxFit.scaleDown, 
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
