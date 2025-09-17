@@ -1,0 +1,2 @@
+C:/Users/dsadm/Desktop/Desem.Mobile2_LucasSantino/Aula6/appdeliverytb/android/app/.cxx/Debug/3viw6446/x86_64/CMakeFiles/edit_cache.dir
+C:/Users/dsadm/Desktop/Desem.Mobile2_LucasSantino/Aula6/appdeliverytb/android/app/.cxx/Debug/3viw6446/x86_64/CMakeFiles/rebuild_cache.dir

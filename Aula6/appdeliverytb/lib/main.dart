@@ -2,24 +2,31 @@ import 'package:appdeliverytb/data/restaurant_data.dart';
 import 'package:appdeliverytb/ui/_core/app_theme.dart';
 import 'package:appdeliverytb/ui/widgets/bag_provider.dart';
 import 'package:appdeliverytb/ui/widgets/splash/splash_screen.dart';
+import 'package:appdeliverytb/ui/widgets/login/login.dart';
+import 'package:appdeliverytb/ui/widgets/login/cadastro.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   RestaurantData restaurantData = RestaurantData();
   await restaurantData.getRestaurant();
+
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(
-        create:(context){
-          return restaurantData;
-        }),
-        ChangeNotifierProvider(create: (context)=>BagProvider())
+          create: (context) {
+            return restaurantData;
+          },
+        ),
+        ChangeNotifierProvider(
+          create: (context) => BagProvider(),
+        ),
       ],
-    
-   child:  MyApp()));
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -30,7 +37,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: AppTheme.appTheme,
-      home: SplashScreen(),
+      initialRoute: "/splash",
+      routes: {
+        "/splash": (context) => const SplashScreen(),
+        "/login": (context) => LoginScreen(),
+        "/cadastro": (context) => CadastroScreen(),
+      },
     );
   }
 }
