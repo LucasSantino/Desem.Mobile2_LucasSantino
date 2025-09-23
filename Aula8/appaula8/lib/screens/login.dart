@@ -13,30 +13,44 @@ class _LoginScreenState extends State<LoginScreen> {
   final _emailCtr = TextEditingController();
   final _passCtr = TextEditingController();
   bool loading = false;
-  final String baseUrl = 'http://10.0.2.2:3000'; // ajuste conforme seu ambiente
+
+  final String baseUrl = 'http://10.0.2.2:3000'; // IP do emulador Android
 
   Future<void> _login() async {
+    if (_emailCtr.text.isEmpty || _passCtr.text.isEmpty) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text('Preencha todos os campos')));
+      return;
+    }
+
     setState(() => loading = true);
+
     try {
-      final uri = Uri.parse('$baseUrl/usuario');
-      final resp = await http.get(uri);
+      // Consulta via query parameters
+      final uri = Uri.parse(
+          '$baseUrl/cadastro-usuario?email=${_emailCtr.text}&password=${_passCtr.text}');
+      final resp = await http.get(uri).timeout(const Duration(seconds: 10));
+
       if (resp.statusCode == 200) {
         final List users = jsonDecode(resp.body) as List;
-        final found = users.firstWhere(
-          (u) => u['email'] == _emailCtr.text && u['password'] == _passCtr.text,
-          orElse: () => null,
-        );
-        if (found != null) {
-          // login ok
+        if (users.isNotEmpty) {
+          // Login OK
+          ScaffoldMessenger.of(context)
+              .showSnackBar(const SnackBar(content: Text('Login realizado com sucesso')));
+
+          // Navega para a tela Home (rota '/')
           Navigator.pushReplacementNamed(context, '/');
         } else {
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Credenciais inválidas')));
+          ScaffoldMessenger.of(context)
+              .showSnackBar(const SnackBar(content: Text('Email ou senha inválidos')));
         }
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Erro no servidor')));
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text('Erro no servidor: ${resp.statusCode}')));
       }
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Erro: $e')));
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text('Erro ao conectar: $e')));
     } finally {
       setState(() => loading = false);
     }
@@ -61,9 +75,18 @@ class _LoginScreenState extends State<LoginScreen> {
             const SizedBox(height: 8),
             TextField(controller: _passCtr, decoration: const InputDecoration(labelText: 'Senha'), obscureText: true),
             const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: loading ? null : _login,
-              child: loading ? const CircularProgressIndicator() : const Text('Entrar'),
+            SizedBox(
+              width: double.infinity,
+              child: ElevatedButton(
+                onPressed: loading ? null : _login,
+                child: loading
+                    ? const SizedBox(
+                        width: 24,
+                        height: 24,
+                        child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2),
+                      )
+                    : const Text('Entrar'),
+              ),
             ),
             TextButton(
               onPressed: () => Navigator.pushNamed(context, '/register'),

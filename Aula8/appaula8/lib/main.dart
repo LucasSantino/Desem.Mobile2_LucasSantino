@@ -22,11 +22,11 @@ class SmHotelApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.teal,
         ),
-        initialRoute: '/login',
+        initialRoute: '/login', // inicia na tela de login
         routes: {
-          '/': (_) => const Home(),
           '/login': (_) => const LoginScreen(),
           '/register': (_) => const RegisterScreen(),
+          '/home': (_) => const Home(), // rota explícita para home
           '/checkout': (_) => const CheckoutScreen(),
         },
       ),

@@ -1,0 +1,22 @@
+{
+  "cadastro-usuario": [
+    {
+      "id": "1528",
+      "name": "lucas",
+      "email": "lucas@teste.com",
+      "password": "123456"
+    },
+    {
+      "id": "e47c",
+      "name": "lucas",
+      "email": "lucas@teste.com",
+      "password": "123456"
+    },
+    {
+      "id": "840e",
+      "name": "will",
+      "email": "will@teste.com",
+      "password": "123456"
+    }
+  ]
+}
