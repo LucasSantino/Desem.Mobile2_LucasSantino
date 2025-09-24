@@ -2,20 +2,52 @@
   "cadastro-usuario": [
     {
       "id": "1528",
-      "name": "lucas",
+      "name": "Lucas",
       "email": "lucas@teste.com",
       "password": "123456"
     },
     {
       "id": "e47c",
-      "name": "lucas",
-      "email": "lucas@teste.com",
+      "name": "Lucas",
+      "email": "lucas2@teste.com",
       "password": "123456"
     },
     {
       "id": "840e",
-      "name": "will",
+      "name": "Will",
       "email": "will@teste.com",
+      "password": "123456"
+    },
+    {
+      "id": "d657",
+      "name": "Daniel",
+      "email": "danil@teste.com",
+      "password": "123456"
+    }
+  ],
+  "usuarios": [
+    {
+      "id": "1528",
+      "name": "Lucas",
+      "email": "lucas@teste.com",
+      "password": "123456"
+    },
+    {
+      "id": "e47c",
+      "name": "Lucas",
+      "email": "lucas2@teste.com",
+      "password": "123456"
+    },
+    {
+      "id": "840e",
+      "name": "Will",
+      "email": "will@teste.com",
+      "password": "123456"
+    },
+    {
+      "id": "d657",
+      "name": "Daniel",
+      "email": "danil@teste.com",
       "password": "123456"
     }
   ]

@@ -18,39 +18,54 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Future<void> _login() async {
     if (_emailCtr.text.isEmpty || _passCtr.text.isEmpty) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text('Preencha todos os campos')));
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Preencha todos os campos')),
+      );
       return;
     }
 
     setState(() => loading = true);
 
     try {
-      // Consulta via query parameters
-      final uri = Uri.parse(
-          '$baseUrl/cadastro-usuario?email=${_emailCtr.text}&password=${_passCtr.text}');
+      // Busca todos os usuários cadastrados
+      final uri = Uri.parse('$baseUrl/');
       final resp = await http.get(uri).timeout(const Duration(seconds: 10));
 
       if (resp.statusCode == 200) {
         final List users = jsonDecode(resp.body) as List;
-        if (users.isNotEmpty) {
-          // Login OK
-          ScaffoldMessenger.of(context)
-              .showSnackBar(const SnackBar(content: Text('Login realizado com sucesso')));
 
-          // Navega para a tela Home (rota '/')
-          Navigator.pushReplacementNamed(context, '/');
+        // Lógica de comparação
+        Map<String, dynamic>? user;
+        for (var u in users) {
+          if (u['email'].toString() == _emailCtr.text &&
+              u['password'].toString() == _passCtr.text) {
+            user = u as Map<String, dynamic>;
+            break;
+          }
+        }
+
+        if (user != null) {
+          // Login OK
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Login realizado com sucesso')),
+          );
+
+          // Navega para a tela Home
+          Navigator.pushReplacementNamed(context, '/home');
         } else {
-          ScaffoldMessenger.of(context)
-              .showSnackBar(const SnackBar(content: Text('Email ou senha inválidos')));
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Email ou senha inválidos')),
+          );
         }
       } else {
-        ScaffoldMessenger.of(context)
-            .showSnackBar(SnackBar(content: Text('Erro no servidor: ${resp.statusCode}')));
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Erro no servidor: ${resp.statusCode}')),
+        );
       }
     } catch (e) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text('Erro ao conectar: $e')));
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Erro ao conectar: $e')),
+      );
     } finally {
       setState(() => loading = false);
     }
@@ -71,9 +86,16 @@ class _LoginScreenState extends State<LoginScreen> {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            TextField(controller: _emailCtr, decoration: const InputDecoration(labelText: 'Email')),
+            TextField(
+              controller: _emailCtr,
+              decoration: const InputDecoration(labelText: 'Email'),
+            ),
             const SizedBox(height: 8),
-            TextField(controller: _passCtr, decoration: const InputDecoration(labelText: 'Senha'), obscureText: true),
+            TextField(
+              controller: _passCtr,
+              decoration: const InputDecoration(labelText: 'Senha'),
+              obscureText: true,
+            ),
             const SizedBox(height: 16),
             SizedBox(
               width: double.infinity,
@@ -83,7 +105,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     ? const SizedBox(
                         width: 24,
                         height: 24,
-                        child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2),
+                        child: CircularProgressIndicator(
+                          color: Colors.white,
+                          strokeWidth: 2,
+                        ),
                       )
                     : const Text('Entrar'),
               ),
